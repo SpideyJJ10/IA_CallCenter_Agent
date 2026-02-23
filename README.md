@@ -2,7 +2,7 @@
 
 Bienvenido al repositorio oficial de **Connecta Solutions**, un proveedor de BPO y Contact Center de clase mundial. Este proyecto presenta a **Sir Connect**, un asistente de IA avanzado diseñado para ofrecer atención al cliente de élite con precisión y calidez.
 
-## 1. Descripción del proyecto
+## ### 1. Descripción del proyecto
 
 **Sir Connect** es un prototipo funcional de un Agente de IA para BPO que automatiza la atención al cliente de primer nivel. El sistema está diseñado para:
 - Responder consultas sobre horarios, servicios y políticas empresariales.
@@ -10,7 +10,7 @@ Bienvenido al repositorio oficial de **Connecta Solutions**, un proveedor de BPO
 - Gestionar escalamientos a asesores humanos de forma inteligente.
 - Cumplir con requisitos de **baja latencia**, **precisión determinística** y **seguridad de datos**.
 
-## 2. Arquitectura
+## ### 2. Arquitectura
 
 El ecosistema de Sir Connect se basa en una arquitectura modular y ligera:
 
@@ -26,7 +26,7 @@ Para garantizar la integridad corporativa y prevenir el mal uso de la IA, el sis
 3.  **Filtrado de Salida**: Cada respuesta del modelo es verificada para asegurar que no se haya filtrado información sensible o instrucciones del sistema.
 4.  **Entorno Determinístico**: Al no depender de agentes autónomos sin supervisión (tipo AutoGPT), el flujo de la conversación permanece siempre bajo los límites de negocio definidos en el JSON.
 
-## 3. Cómo ejecutar
+## ### 3. Cómo ejecutar
 
 1.  **Clonar el repositorio**:
     ```bash
@@ -42,7 +42,7 @@ Para garantizar la integridad corporativa y prevenir el mal uso de la IA, el sis
     ```
 4.  **Acceder**: Abre `http://127.0.0.1:8000` en tu navegador.
 
-## 4. Justificación técnica
+## ### 4. Justificación técnica
 
 A diferencia de otros desarrollos, Sir Connect utiliza un enfoque de **Ingeniería de Precisión**:
 
@@ -51,4 +51,6 @@ A diferencia de otros desarrollos, Sir Connect utiliza un enfoque de **Ingenier�
 - **Uso de Control Determinístico**: Hemos implementado heurísticas en la detección de intenciones para asegurar que reglas de negocio críticas (como cancelaciones o garantías) se manejen siempre bajo el protocolo estricto de la empresa, eliminando el riesgo de alucinaciones del modelo.
 
 ---
-© 2026 Connecta Solutions. Todos los derechos reservados.
+
+© 2026 **Connecta Solutions**. Todos los derechos reservados.
+*Impulsando el futuro del BPO con Inteligencia Artificial.*
