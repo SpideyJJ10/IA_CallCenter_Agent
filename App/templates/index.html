@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecta Solutions</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="chat-container">
+        <header>
+            <div class="logo-area">
+                <img src="/static/img/connecta_logo.png" alt="Connecta Logo" class="logo">
+                <div class="brand-info">
+                    <h1>Sir Connect</h1>
+                    <span class="status"><span class="pulse-dot"></span>En línea</span>
+                </div>
+            </div>
+        </header>
+
+        <main id="chat-window">
+            <!-- Messages will appear here -->
+        </main>
+
+        <footer class="input-area">
+            <div class="latency-indicator" id="latency">Latencia: -- ms</div>
+            <form id="chat-form">
+                <input type="text" id="user-input" placeholder="Escribe tu mensaje aquí..." autocomplete="off">
+                <button type="submit" id="send-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </form>
+        </footer>
+        <div class="transfer-overlay" id="transfer-overlay">
+            <div class="transfer-icon">
+                <svg viewBox="0 0 24 24" width="32" height="32">
+                    <path fill="white"
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                    </path>
+                </svg>
+            </div>
+            <div class="transfer-title">Conectando con un experto</div>
+            <div class="transfer-status">Buscando el mejor asesor para tu caso...</div>
+
+            <div class="queue-card">
+                <div class="queue-label">Posición en lista</div>
+                <div class="queue-number" id="queue-num">--</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="queue-bar"></div>
+                </div>
+            </div>
+
+            <button id="cancel-transfer" class="cancel-btn">Cancelar Espera</button>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p><strong>Connecta Solutions S.A.S.</strong> | Centro Global de BPO & Contact Center</p>
+            <p>Sede Principal: Av. Dorado #68c-61, Bogotá, Colombia | (+57) 601 234 5678</p>
+            <p class="copyright">© 2026 Connecta Solutions. Sir Connect y el logo de Connecta son marcas registradas.
+                Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/client.js"></script>
+</body>
+
+</html>
