@@ -51,6 +51,17 @@ Una vez iniciado, accede a: [http://127.0.0.1:8000](http://127.0.0.1:8000) 🌐
 
 ---
 
+## 🚂 Despliegue en Railway
+
+Esta aplicación está pre-configurada para desplegarse en **Railway** en cuestión de minutos:
+
+1.  **Conecta tu Repo**: En tu panel de Railway, selecciona "New Project" -> "Deploy from GitHub repo".
+2.  **Variables de Entorno**: Ve a la pestaña "Variables" en Railway y añade:
+    - `OPENAI_API_KEY`: Tu clave de API de OpenAI.
+3.  **Despliegue Automático**: Railway detectará el `Procfile` y el `requirements.txt` automáticamente.
+
+---
+
 ## 📂 Estructura del Proyecto
 El proyecto sigue una organización profesional y escalable:
 
