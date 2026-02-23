@@ -64,8 +64,8 @@ async function sendMessage(e) {
 
         const data = await response.json();
 
-        // Aceleración de respuesta: Reducción drástica del retardo artificial para una experiencia "snappy"
-        const typeDelay = Math.min(Math.max(data.response.length * 5, 300), 1200);
+        // Latencia extrema: Retardo mínimo para una respuesta casi instantánea
+        const typeDelay = Math.min(Math.max(data.response.length * 2, 100), 500);
         await new Promise(resolve => setTimeout(resolve, typeDelay));
 
         typing.remove();

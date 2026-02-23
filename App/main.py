@@ -15,7 +15,7 @@ async def chat(
     """
     Principal endpoint for chat interactions.
     """
-    result = agent.generate_response(message, history=history)
+    result = await agent.generate_response(message, history=history)
     return {
         "response": result.content,
         "latency_seconds": result.latency,
