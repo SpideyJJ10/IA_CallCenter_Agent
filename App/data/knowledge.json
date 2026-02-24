@@ -2,6 +2,9 @@
   "business_name": "Connecta Solutions BPO",
   "location": "Bogotá, Colombia (Sede Principal) y operación remota nacional",
   "currency": "COP",
+  "Moneda": "Pesos Colombianos",
+  "Acerca de Nosotros": "una compañía líder en servicios de Business Process Outsourcing (BPO) con sede principal en la ciudad de Medellín, Colombia. Nos especializamos en diseñar y ejecutar soluciones de contacto que transforman la relación entre las marcas y sus clientes, operando bajo un modelo de excelencia que garantiza disponibilidad 24/7 los 365 días del año.",
+  "Mision": "Impulsar el crecimiento de nuestros aliados estratégicos mediante una gestión operativa impecable, combinando el mejor talento humano con tecnología de vanguardia en Inteligencia Artificial y automatización."
   "contact": {
     "sales_email": "ventas@connectasolutions.co",
     "support_hotline": "+57 601 000 0000"
