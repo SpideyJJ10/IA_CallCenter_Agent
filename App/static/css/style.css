@@ -726,7 +726,7 @@ main::-webkit-scrollbar-track {
 }
 
 /* Responsive */
-@media (max-height: 750px) {
+@media (max-width: 750px) and (min-width: 601px) {
     .chat-container {
         height: 95vh;
     }
@@ -734,5 +734,83 @@ main::-webkit-scrollbar-track {
     .site-footer {
         padding: var(--space-md);
         font-size: 0.78rem;
+    }
+}
+
+/* Mobile Responsive Optimization (< 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+        align-items: flex-start;
+    }
+
+    .chat-container {
+        max-width: 100%;
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Compress header on mobile */
+    header {
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+    }
+
+    .brand-info h1 {
+        font-size: 1.15rem;
+    }
+
+    /* Banner adjustments */
+    .welcome-banner {
+        padding: var(--space-md);
+    }
+
+    .welcome-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .welcome-banner h2 {
+        font-size: 1.3rem;
+    }
+
+    .welcome-banner p {
+        font-size: 0.88rem;
+        max-width: 95%;
+    }
+
+    /* Message width expansion for mobile */
+    .message {
+        max-width: 90%;
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+
+    /* Hide scroll arrows on touch interfaces */
+    .scroll-arrow {
+        display: none !important;
+    }
+
+    /* Remove padding around input area on mobile */
+    .input-area {
+        padding: var(--space-sm);
+        padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+        /* Support iOS notch */
+    }
+
+    /* Hide the external site footer since UI is full screen */
+    .site-footer {
+        display: none;
     }
 }
