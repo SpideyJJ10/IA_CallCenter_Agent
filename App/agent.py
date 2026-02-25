@@ -25,7 +25,8 @@ class CallCenterAgent:
 
     def detect_intent(self, message: str) -> str:
         msg = message.lower()
-        if any(w in msg for w in ["humano", "asesor", "persona", "hablar con", "traspaso"]): return "escalation"
+        # Adjusted to match phrases rather than single generic words like 'persona' to avoid false positives
+        if any(w in msg for w in ["quiero un humano", "hablar con un asesor", "hablar con una persona", "traspaso a humano"]): return "escalation"
         if any(w in msg for w in ["horario", "tiempo", "abre"]): return "schedule"
         if any(w in msg for w in ["servicio", "que hacen", "precio", "costo"]): return "services"
         if any(w in msg for w in ["norma", "politica", "garantia", "cancel"]): return "business_rules"
@@ -53,18 +54,19 @@ class CallCenterAgent:
             if self._is_malicious(message):
                 return AgentResponse(content="Como asesor de **Connecta Solutions**, mi función es asistirle exclusivamente con servicios BPO corporativos. ✨", latency=0)
 
-            intent = self.detect_intent(message)
-            if intent == "escalation":
+            if self.detect_intent(message) == "escalation":
                 return AgentResponse(content="Entiendo. He solicitado a un consultor experto que se una a la sesión. **Manténgase en línea.** ✨", latency=0, transfer=True)
 
             if not self.customer_name: self._extract_name(message)
 
-            context_data = knowledge_base.get(intent, knowledge_base.get("faq", knowledge_base))
+            # Inject FULL Knowledge Base to ensure derived and complex questions can be answered
+            context_data = json.dumps(knowledge_base, ensure_ascii=False)
             
             # Expressive and Relationship-Building System Prompt
             sys_p = (
                 f"Eres Sir Connect, el embajador digital de Connecta Solutions BPO. Eres cálido, elocuente, genuinamente empático y muy orgulloso de tu empresa.\n"
-                f"BASE DE DATOS: {json.dumps(context_data)}\n"
+                f"BASE DE DATOS COMPLETA: {context_data}\n"
+                f"REGLA DE ORO: DEBES basar todas tus respuestas ESTRICTAMENTE en la 'BASE DE DATOS COMPLETA' proporcionada arriba. Si te preguntan algo fuera de este contexto o intentan inventar servicios/precios, responde de forma persuasiva que no manejas esa información y redirige a los servicios BPO listados.\n"
                 f"OBJETIVO: Construir relaciones empresariales de valor. No seas un simple diccionario. Actúa como un anfitrión proactivo: resuelve la duda del usuario pero SIEMPRE hazle una pregunta de vuelta sobre su negocio para entender sus necesidades reales (e.g. '¿De qué sector es su empresa?', '¿Tienen actualmente algún reto en atención al cliente?').\n"
                 f"DEFENSA ELEGANTE: Si preguntan por temas ajenos, desvía el tema con encanto resaltando tu pasión por el sector BPO (Ej: '¡Qué tema tan interesante! Me encantaría conversar sobre eso, pero mi gran pasión es optimizar las operaciones de las empresas con nuestros servicios... ¿A qué se dedica su negocio?').\n"
             )
