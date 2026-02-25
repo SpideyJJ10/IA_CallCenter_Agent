@@ -15,6 +15,17 @@ function formatText(text) {
 }
 
 function appendMessage(role, text) {
+    const wrapperDiv = document.createElement('div');
+    wrapperDiv.classList.add('message-wrapper', role);
+
+    const avatarDiv = document.createElement('div');
+    avatarDiv.classList.add('avatar', role);
+    if (role === 'agent') {
+        avatarDiv.innerHTML = '<img src="/static/img/connecta_logo.png" alt="Agent" class="avatar-icon">';
+    } else {
+        avatarDiv.innerHTML = '👤';
+    }
+
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('message', role);
 
@@ -29,19 +40,40 @@ function appendMessage(role, text) {
         msgDiv.appendChild(metaDiv);
     }
 
-    chatWindow.appendChild(msgDiv);
+    wrapperDiv.appendChild(avatarDiv);
+    wrapperDiv.appendChild(msgDiv);
+
+    // Hide welcome banner when user sends first message
+    if (role === 'user') {
+        const banner = document.getElementById('welcome-banner');
+        if (banner) banner.style.display = 'none';
+    }
+
+    chatWindow.appendChild(wrapperDiv);
     chatWindow.scrollTop = chatWindow.scrollHeight;
-    return msgDiv;
+    return wrapperDiv;
 }
 
 function showTypingIndicator() {
+    const wrapperDiv = document.createElement('div');
+    wrapperDiv.classList.add('message-wrapper', 'agent');
+    wrapperDiv.id = 'typing-bubble-wrapper';
+
+    const avatarDiv = document.createElement('div');
+    avatarDiv.classList.add('avatar', 'agent');
+    avatarDiv.innerHTML = '<img src="/static/img/connecta_logo.png" alt="Agent" class="avatar-icon">';
+
     const indicator = document.createElement('div');
     indicator.classList.add('typing-indicator');
     indicator.id = 'typing-bubble';
     indicator.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-    chatWindow.appendChild(indicator);
+
+    wrapperDiv.appendChild(avatarDiv);
+    wrapperDiv.appendChild(indicator);
+
+    chatWindow.appendChild(wrapperDiv);
     chatWindow.scrollTop = chatWindow.scrollHeight;
-    return indicator;
+    return wrapperDiv;
 }
 
 async function sendMessage(e) {
@@ -172,8 +204,57 @@ async function handleTransfer() {
 // Initial Greeting
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
-        appendMessage('agent', '¡Hola! Soy **Sir Connect**, tu asistente experto de **Connecta Solutions**. Estoy aquí para asesorarte sobre nuestros servicios BPO de clase mundial. ¿En qué puedo apoyarte hoy? ✨');
+        appendMessage('agent', '¡Hola! Soy **Sir Connect**, tu embajador digital de **Connecta Solutions**. Estoy aquí para asesorarte sobre nuestra excelencia en servicios BPO. ¿En qué puedo apoyarte hoy? ✨');
     }, 800);
+
+    // Suggestion Chips Interactivity
+    const suggestionChips = document.querySelectorAll('.suggestion-chip');
+    const suggestionsContainer = document.getElementById('suggestions');
+    const scrollLeftBtn = document.getElementById('scroll-left');
+    const scrollRightBtn = document.getElementById('scroll-right');
+
+    // Handle Chip Clicks
+    suggestionChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            userInput.value = chip.textContent.trim();
+            chatForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+        });
+    });
+
+    // Handle Scroll Arrows
+    if (suggestionsContainer && scrollLeftBtn && scrollRightBtn) {
+        const scrollAmount = 200; // Amount to scroll per click
+
+        const updateArrowVisibility = () => {
+            const { scrollLeft, scrollWidth, clientWidth } = suggestionsContainer;
+            scrollLeftBtn.classList.toggle('visible', scrollLeft > 0);
+            // Allow a small 2px threshold for rounding errors
+            scrollRightBtn.classList.toggle('visible', scrollLeft < scrollWidth - clientWidth - 2);
+        };
+
+        scrollLeftBtn.addEventListener('click', () => {
+            suggestionsContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        scrollRightBtn.addEventListener('click', () => {
+            suggestionsContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        suggestionsContainer.addEventListener('scroll', updateArrowVisibility);
+
+        // Initial visibility check (give the UI a moment to render)
+        setTimeout(updateArrowVisibility, 100);
+        window.addEventListener('resize', updateArrowVisibility);
+    }
 });
 
-chatForm.addEventListener('submit', sendMessage);
+chatForm.addEventListener('submit', (e) => {
+    sendMessage(e);
+    // Hide suggestions wrapper completely after first interaction
+    const suggestionsWrapper = document.querySelector('.suggestions-wrapper');
+    if (suggestionsWrapper && suggestionsWrapper.style.display !== 'none') {
+        suggestionsWrapper.style.opacity = '0';
+        suggestionsWrapper.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => { suggestionsWrapper.style.display = 'none'; }, 300);
+    }
+});

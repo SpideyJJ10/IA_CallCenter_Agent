@@ -53,6 +53,14 @@
     {
       "question": "¿Qué tecnología utilizan para la telefonía?",
       "answer": "Operamos con infraestructura propia sobre protocolos VoIP, utilizando plataformas líderes como Genesys o Amazon Connect para garantizar 99.9% de uptime."
+    },
+    {
+      "question": "¿Tienen casos de éxito probados?",
+      "answer": "Por supuesto. Hemos trabajado con empresas líderes en telecomunicaciones y banca, logrando reducciones del 30% en TMO y aumentos del 25% en retención de clientes durante el primer semestre de operación."
+    },
+    {
+      "question": "¿Qué son sus plataformas omnicanal?",
+      "answer": "Nuestra solución omnicanal integra correo, redes sociales, WhatsApp y voz en un solo panel para el asesor, garantizando que el usuario tenga un historial unificado sin importar por dónde nos contacte."
     }
   ],
   "business_rules": [

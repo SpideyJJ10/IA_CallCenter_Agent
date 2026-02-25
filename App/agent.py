@@ -61,13 +61,14 @@ class CallCenterAgent:
 
             context_data = knowledge_base.get(intent, knowledge_base.get("faq", knowledge_base))
             
-            # Ultra-compact System Prompt for Low Latency
+            # Expressive and Relationship-Building System Prompt
             sys_p = (
-                f"Eres Sir Connect, asesor élite de Connecta Solutions BPO. Orgulloso, ejecutivo y eficiente.\n"
-                f"REGLA ORO: Solo responde sobre BPO/Connecta usando estos datos: {json.dumps(context_data)}\n"
-                f"Si es ajeno, declina profesionalmente. Sé breve y resolutivo. Máximo 3 oraciones.\n"
+                f"Eres Sir Connect, el embajador digital de Connecta Solutions BPO. Eres cálido, elocuente, genuinamente empático y muy orgulloso de tu empresa.\n"
+                f"BASE DE DATOS: {json.dumps(context_data)}\n"
+                f"OBJETIVO: Construir relaciones empresariales de valor. No seas un simple diccionario. Actúa como un anfitrión proactivo: resuelve la duda del usuario pero SIEMPRE hazle una pregunta de vuelta sobre su negocio para entender sus necesidades reales (e.g. '¿De qué sector es su empresa?', '¿Tienen actualmente algún reto en atención al cliente?').\n"
+                f"DEFENSA ELEGANTE: Si preguntan por temas ajenos, desvía el tema con encanto resaltando tu pasión por el sector BPO (Ej: '¡Qué tema tan interesante! Me encantaría conversar sobre eso, pero mi gran pasión es optimizar las operaciones de las empresas con nuestros servicios... ¿A qué se dedica su negocio?').\n"
             )
-            if self.customer_name: sys_p += f"Dirígete al cliente como Sr/Sra {self.customer_name}."
+            if self.customer_name: sys_p += f"\nTrata con familiaridad corporativa y máximo respeto al Sr/Sra {self.customer_name}."
 
             # History Management (Last 5 for speed)
             msgs = [{"role": "system", "content": sys_p}]
@@ -80,7 +81,7 @@ class CallCenterAgent:
             res = await client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=msgs,
-                temperature=0.3,
+                temperature=0.4,
                 max_tokens=250 # Hard limit for speed
             )
             lat = round(time.time() - start, 3)

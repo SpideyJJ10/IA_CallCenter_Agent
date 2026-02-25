@@ -25,10 +25,64 @@
         </header>
 
         <main id="chat-window">
+            <div class="welcome-banner" id="welcome-banner">
+                <img src="/static/img/connecta_logo.png" alt="Connecta Solutions" class="welcome-logo">
+                <h2>Bienvenido a Connecta</h2>
+                <p>Tu socio estratégico en excelencia BPO. ¿Cómo podemos transformar tu negocio hoy?</p>
+            </div>
             <!-- Messages will appear here -->
         </main>
 
         <footer class="input-area">
+            <div class="suggestions-wrapper">
+                <button class="scroll-arrow left-arrow" id="scroll-left" aria-label="Scroll left">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+                <div class="suggestions-container" id="suggestions">
+                    <button class="suggestion-chip">
+                        <svg viewBox="0 0 24 24" width="16" height="16" class="chip-icon">
+                            <path fill="currentColor"
+                                d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+                        </svg>
+                        ¿Cuáles son sus servicios?
+                    </button>
+                    <button class="suggestion-chip">
+                        <svg viewBox="0 0 24 24" width="16" height="16" class="chip-icon">
+                            <path fill="currentColor"
+                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z" />
+                        </svg>
+                        Casos de Éxito
+                    </button>
+                    <button class="suggestion-chip">
+                        <svg viewBox="0 0 24 24" width="16" height="16" class="chip-icon">
+                            <path fill="currentColor"
+                                d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z" />
+                        </svg>
+                        Plataformas Omnicanal
+                    </button>
+                    <button class="suggestion-chip">
+                        <svg viewBox="0 0 24 24" width="16" height="16" class="chip-icon">
+                            <path fill="currentColor"
+                                d="M21 11c0-2.8-2.2-5-5-5H8c-2.8 0-5 2.2-5 5v5c0 .6.4 1 1 1h2v-6c0-1.7 1.3-3 3-3h6c1.7 0 3 1.3 3 3v6h2c.6 0 1-.4 1-1v-5zM15 15c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z" />
+                        </svg>
+                        Automatización con IA
+                    </button>
+                    <button class="suggestion-chip">
+                        <svg viewBox="0 0 24 24" width="16" height="16" class="chip-icon">
+                            <path fill="currentColor"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                        </svg>
+                        Hablar con un asesor
+                    </button>
+                </div>
+                <button class="scroll-arrow right-arrow" id="scroll-right" aria-label="Scroll right">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </button>
+            </div>
             <div class="latency-indicator" id="latency">Latencia: -- ms</div>
             <form id="chat-form">
                 <input type="text" id="user-input" placeholder="Escribe tu mensaje aquí..." autocomplete="off">
