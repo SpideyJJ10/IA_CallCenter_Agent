@@ -2,6 +2,9 @@
   "business_name": "Connecta Solutions BPO",
   "location": "Bogotá, Colombia (Sede Principal) y operación remota nacional",
   "currency": "COP",
+  "Moneda": "Pesos Colombianos",
+  "Acerca de Nosotros": "una compañía líder en servicios de Business Process Outsourcing (BPO) con sede principal en la ciudad de Medellín, Colombia. Nos especializamos en diseñar y ejecutar soluciones de contacto que transforman la relación entre las marcas y sus clientes, operando bajo un modelo de excelencia que garantiza disponibilidad 24/7 los 365 días del año.",
+  "Mision": "Impulsar el crecimiento de nuestros aliados estratégicos mediante una gestión operativa impecable, combinando el mejor talento humano con tecnología de vanguardia en Inteligencia Artificial y automatización.",
   "contact": {
     "sales_email": "ventas@connectasolutions.co",
     "support_hotline": "+57 601 000 0000"
@@ -14,85 +17,63 @@
   "services": [
     {
       "id": "srv_cc_001",
-      "name": "Customer Experience (CX) Multicanal",
-      "description": "Atención humana en voz, chat web, correo y redes sociales con enfoque en resolución en primer contacto (FCR).",
+      "name": "Atención al Cliente Multicanal",
+      "description": "Gestión de PQRS, chat en vivo y atención telefónica de primer nivel.",
       "price": 42000,
       "unit": "hora por agente"
     },
     {
       "id": "srv_cc_002",
-      "name": "Outbound Sales & Growth",
-      "description": "Televentas con marcación predictiva, prospección de leads y programas de lealtad.",
+      "name": "Televentas y Telemercadeo",
+      "description": "Campañas de prospección, cierre de ventas y fidelización de clientes.",
       "price": 50000,
-      "unit": "hora por agente + bono por cumplimiento"
+      "unit": "hora por agente + comisión"
     },
     {
       "id": "srv_cc_003",
-      "name": "Backoffice & Gestión de Procesos",
-      "description": "Procesamiento de datos, validación de documentos y soporte administrativo de segundo nivel.",
-      "price": 38000,
+      "name": "Cobranza y Recuperación de Cartera",
+      "description": "Gestión de cobro administrativo y persuasivo para mora temprana.",
+      "price": 46000,
       "unit": "hora por agente"
-    },
-    {
-      "id": "srv_cc_004",
-      "name": "Automatización con IA (Chatbots/Voicebots)",
-      "description": "Implementación de flujos automatizados con IA generativa para autogestión de clientes.",
-      "price": 2500000,
-      "unit": "implementación base + costo por interacción"
     }
   ],
   "faq": [
     {
-      "question": "¿Cómo garantizan la calidad del servicio?",
-      "answer": "Contamos con un equipo de Quality Assurance (QA) que monitorea el 5% de las interacciones semanales bajo una matriz de calidad técnica y de experiencia."
+      "question": "¿Cuentan con personal bilingüe?",
+      "answer": "Sí, disponemos de agentes con nivel de inglés B2/C1. Estos servicios tienen un recargo del 40% sobre la tarifa base."
     },
     {
-      "question": "¿Tienen capacidad de escalabilidad rápida?",
-      "answer": "Sí, mediante nuestro modelo 'Ramp-up', podemos incrementar la plantilla operativa hasta en un 20% en menos de 15 días hábiles."
+      "question": "¿Ofrecen reportes de métricas en tiempo real?",
+      "answer": "Correcto. Todos nuestros clientes tienen acceso a un dashboard de Power BI con KPIs como TMO, Nivel de Servicio y Calidad."
+    },
+    {
+      "question": "¿Cómo manejan picos de llamadas imprevistos?",
+      "answer": "Contamos con un equipo de 'Overflow' que se activa automáticamente cuando el tiempo de espera supera los 30 segundos."
+    },
+    {
+      "question": "¿Cuál es el tiempo mínimo de contratación?",
+      "answer": "Para garantizar la rentabilidad operativa, el contrato mínimo es de 5 posiciones (agentes) por campaña."
     },
     {
       "question": "¿Qué tecnología utilizan para la telefonía?",
       "answer": "Operamos con infraestructura propia sobre protocolos VoIP, utilizando plataformas líderes como Genesys o Amazon Connect para garantizar 99.9% de uptime."
-    },
-    {
-      "question": "¿Tienen casos de éxito probados?",
-      "answer": "Por supuesto. Hemos trabajado con empresas líderes en telecomunicaciones y banca, logrando reducciones del 30% en TMO y aumentos del 25% en retención de clientes durante el primer semestre de operación."
-    },
-    {
-      "question": "¿Qué son sus plataformas omnicanal?",
-      "answer": "Nuestra solución omnicanal integra correo, redes sociales, WhatsApp y voz en un solo panel para el asesor, garantizando que el usuario tenga un historial unificado sin importar por dónde nos contacte."
     }
   ],
   "business_rules": [
     {
       "rule_id": "BR_CC_001",
-      "title": "Mínimo de Operación",
-      "description": "El contrato mínimo es de 5 posiciones full-time (FTE) para asegurar la viabilidad de la supervisión dedicada."
+      "title": "Mínimo de Posiciones",
+      "description": "Se requiere la contratación de un mínimo de 5 posiciones para iniciar cualquier campaña."
     },
     {
       "rule_id": "BR_CC_002",
-      "title": "Curva de Aprendizaje",
-      "description": "Los primeros 30 días de operación se consideran 'periodo de estabilización'. Durante este tiempo, los SLAs de TMO (Tiempo Medio de Operación) son flexibles."
+      "title": "Costos de Capacitación",
+      "description": "El entrenamiento específico se factura al 50% de la tarifa estándar por hora."
     },
     {
       "rule_id": "BR_CC_003",
-      "title": "Facturación de Horas Extra",
-      "description": "Horas adicionales no programadas solicitadas por el cliente se facturarán con un recargo del 25% sobre la tarifa base."
-    },
-    {
-      "rule_id": "BR_CC_004",
-      "title": "Plan de Continuidad del Negocio (BCP)",
-      "description": "En caso de falla eléctrica o de red en sede física, el 100% de la operación migra a modelo Work-at-Home en menos de 60 minutos."
-    },
-    {
-      "rule_id": "BR_CC_005",
-      "title": "Propiedad de la Información",
-      "description": "Las bases de datos entregadas por el cliente son de su propiedad exclusiva. Connecta Solutions actúa solo como encargado del tratamiento (Ley 1581)."
-    },
-    {
-      "rule_id": "BR_CC_006",
-      "title": "Modelo de Bonificación",
-      "description": "Si se superan los KPIs de satisfacción (NPS) por encima del 90% durante un trimestre, se aplicará un bono de éxito del 2% sobre la facturación de dicho periodo."
+      "title": "Recargos Legales",
+      "description": "Horas nocturnas y festivos incluyen recargos según el Código Sustantivo del Trabajo."
     }
   ]
 }
