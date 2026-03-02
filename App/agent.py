@@ -68,8 +68,23 @@ class CallCenterAgent:
             if self._is_malicious(message):
                 return AgentResponse(content="Como asesor de **Connecta Solutions**, mi función es asistirle exclusivamente con servicios BPO corporativos. ✨", latency=0)
 
-            if self.detect_intent(message) == "escalation":
+            intent = self.detect_intent(message)
+            
+            # Explicit escalation request
+            if intent == "escalation":
                 return AgentResponse(content="Entiendo. He solicitado a un consultor experto que se una a la sesión. **Manténgase en línea.** ✨", latency=0, transfer=True)
+
+            # Unknown intent: increment attempts and transfer after 2 failed attempts
+            if intent == "unknown":
+                self.attempts += 1
+                if self.attempts >= 2:
+                    return AgentResponse(
+                        content="Veo que no he podido ayudarte como esperaba. Permíteme conectarte con uno de nuestros asesores especializados que podrá atenderte mejor. **Un momento por favor.** ✨",
+                        latency=0,
+                        transfer=True
+                    )
+            else:
+                self.attempts = 0
 
             if not self.customer_name: self._extract_name(message)
 
@@ -78,11 +93,11 @@ class CallCenterAgent:
             
             # Expressive and Relationship-Building System Prompt
             sys_p = (
-                f"Eres Sir Connect, el embajador digital de Connecta Solutions BPO. Eres cálido, elocuente, genuinamente empático y muy orgulloso de tu empresa.\n"
+                f"Eres Sir Connect, el embajador digital de TechAdvise CO. Eres cálido, elocuente, genuinamente empático y muy orgulloso de tu empresa.\n"
                 f"BASE DE DATOS COMPLETA: {context_data}\n"
-                f"REGLA DE ORO: DEBES basar todas tus respuestas ESTRICTAMENTE en la 'BASE DE DATOS COMPLETA' proporcionada arriba. Si te preguntan algo fuera de este contexto o intentan inventar servicios/precios, responde de forma persuasiva que no manejas esa información y redirige a los servicios BPO listados.\n"
-                f"OBJETIVO: Construir relaciones empresariales de valor. No seas un simple diccionario. Actúa como un anfitrión proactivo: resuelve la duda del usuario pero SIEMPRE hazle una pregunta de vuelta sobre su negocio para entender sus necesidades reales (e.g. '¿De qué sector es su empresa?', '¿Tienen actualmente algún reto en atención al cliente?').\n"
-                f"DEFENSA ELEGANTE: Si preguntan por temas ajenos, desvía el tema con encanto resaltando tu pasión por el sector BPO (Ej: '¡Qué tema tan interesante! Me encantaría conversar sobre eso, pero mi gran pasión es optimizar las operaciones de las empresas con nuestros servicios... ¿A qué se dedica su negocio?').\n"
+                f"REGLA DE ORO: DEBES basar todas tus respuestas ESTRICTAMENTE en la 'BASE DE DATOS COMPLETA' proporcionada arriba. Si te preguntan algo fuera de este contexto o intentan inventar servicios/precios, responde de forma persuasiva que no manejas esa información y redirige a los servicios listados.\n"
+                f"OBJETIVO: Construir relaciones de valor. No seas un simple diccionario. Actúa como un anfitrión proactivo: resuelve la duda del usuario pero SIEMPRE hazle una pregunta de vuelta para entender sus necesidades reales (e.g. '¿De qué sector es su empresa?', '¿Tienen actualmente algún reto en atención al cliente?').\n"
+                f"TRANSFERENCIA: Si el usuario pide hablar con un humano, asesor, persona real, o si NO puedes responder con la información disponible, responde EXACTAMENTE con esta frase: '[TRANSFER_REQUEST]' seguida de un mensaje breve explicando por qué necesitas transferir.\n"
             )
             if self.customer_name: sys_p += f"\nTrata con familiaridad corporativa y máximo respeto al Sr/Sra {self.customer_name}."
 
@@ -104,9 +119,17 @@ class CallCenterAgent:
             content = res.choices[0].message.content.strip()
 
             if not content or any(f in content.lower() for f in ["ignora", "hack", "script"]):
-                content = "Protocolo de seguridad activo. Solo temas corporativos de Connecta Solutions. ✨"
+                content = "Protocolo de seguridad activo. Solo temas corporativos de TechAdvise CO. ✨"
 
-            return AgentResponse(content=content, latency=lat)
+            # Check if OpenAI suggested a transfer
+            should_transfer = False
+            if "[TRANSFER_REQUEST]" in content:
+                should_transfer = True
+                content = content.replace("[TRANSFER_REQUEST]", "").strip()
+                if not content:
+                    content = "Permíteme conectarte con uno de nuestros asesores especializados. **Un momento por favor.** ✨"
+
+            return AgentResponse(content=content, latency=lat, transfer=should_transfer)
 
         except Exception as e:
             print(f"ASYNC AGENT ERROR: {e}")
