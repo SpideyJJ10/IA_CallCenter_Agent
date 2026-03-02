@@ -25,11 +25,25 @@ class CallCenterAgent:
 
     def detect_intent(self, message: str) -> str:
         msg = message.lower()
-        # Adjusted to match phrases rather than single generic words like 'persona' to avoid false positives
-        if any(w in msg for w in ["quiero un humano", "hablar con un asesor", "hablar con una persona", "traspaso a humano"]): return "escalation"
-        if any(w in msg for w in ["horario", "tiempo", "abre"]): return "schedule"
-        if any(w in msg for w in ["servicio", "que hacen", "precio", "costo"]): return "services"
-        if any(w in msg for w in ["norma", "politica", "garantia", "cancel"]): return "business_rules"
+        
+        # Escalation patterns (expanded for better detection)
+        escalation_patterns = [
+            "quiero un humano", "hablar con un asesor", "hablar con una persona",
+            "traspaso a humano", "transferir", "hablar con alguien", "persona real",
+            "agente humano", "operador", "representante", "necesito ayuda de un asesor",
+            "quiero hablar con", "comunicarme con un asesor", "asesor humano"
+        ]
+        if any(pattern in msg for pattern in escalation_patterns):
+            return "escalation"
+        
+        # Other intents
+        if any(w in msg for w in ["horario", "tiempo", "abre", "cierra", "cuando"]): 
+            return "schedule"
+        if any(w in msg for w in ["servicio", "que hacen", "precio", "costo", "tarifa"]): 
+            return "services"
+        if any(w in msg for w in ["norma", "politica", "garantia", "cancel", "devolucion"]): 
+            return "business_rules"
+        
         return "unknown"
 
     def _extract_name(self, message: str):

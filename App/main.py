@@ -19,7 +19,7 @@ async def chat(
     return {
         "response": result.content,
         "latency_seconds": result.latency,
-        "transfer": result.transfer
+        "transfer": result.transfer if result.transfer else False
     }
 
 # Serve static files (CSS, JS, Images)
